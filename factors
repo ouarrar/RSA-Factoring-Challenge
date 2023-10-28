@@ -1,25 +1,23 @@
 #!/usr/bin/python3
-from sys import argv
+def factorize(n):
+    for i in range(2, int(n**0.5) + 1):
+        if n % i:
+            continue
+        return i, n // i
+    return 1, n
 
+def main():
+    import sys
+    if len(sys.argv) != 2:
+        print(f"Usage: {sys.argv[0]} <file>")
+        return
 
-def factorize(value):
-	i = 2
-	if value < 2:
-		return
-	while value % i:
-		i += 1
-	print("{}={}*{}".format(value,value//i,i))
+    with open(sys.argv[1], 'r') as f:
+        for line in f:
+            n = int(line.strip())
+            p, q = factorize(n)
+            print(f"{n}={p}*{q}")
 
-if len(argv) != 2:
-	exit()
+if __name__ == "__main__":
+    main()
 
-try:
-	with open(argv[1]) as file:
-		line = file.readline()
-
-		while line != "":
-			value = int(line.split('\n')[0])
-			factorize(value)
-			line = file.readline()
-except:
-	pass
