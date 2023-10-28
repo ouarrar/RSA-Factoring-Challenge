@@ -4,7 +4,7 @@ from sys import argv
 
 def factorize(value):
 	i = 2
-	n=1;
+	n=2;
 	if value < 2:
 		return
 	while value % i:
