@@ -4,13 +4,11 @@ from sys import argv
 
 def factorize(value):
 	i = 2
-	n=2;
 	if value < 2:
 		return
 	while value % i:
 		i += 1
-		n = value // i
-	print(f"{value}={n}*{i}")
+	print("{}={}*{}".format(value,value//i,i))
 
 if len(argv) != 2:
 	exit()
