@@ -13,7 +13,7 @@ def factor_numbers(input_file):
                 else :
                     p = factors[0]
                     q = int(n) // int(p)
-                print(f"{n} = {q} * {p}")
+                print(f"{n}={q}*{p}")
     except FileNotFoundError:
         print(f"Error: File '{input_file}' not found.")
     except Exception as e:
