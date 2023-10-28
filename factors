@@ -1,23 +1,36 @@
-#!/usr/bin/python3
-def factorize(n):
-    for i in range(2, int(n**0.5) + 1):
-        if n % i:
-            continue
-        return i, n // i
-    return 1, n
+#!/usr/bin/env python3
+import subprocess
+import sys
 
-def main():
-    import sys
-    if len(sys.argv) != 2:
-        print(f"Usage: {sys.argv[0]} <file>")
-        return
 
-    with open(sys.argv[1], 'r') as f:
-        for line in f:
-            n = int(line.strip())
-            p, q = factorize(n)
-            print(f"{n}={p}*{q}")
+def check_factor(args):
+    if len(args) != 3:
+        count = 0
+        num2 = 1
 
-if __name__ == "__main__":
-    main()
+        for a in args:
+            if count > 1:
+                num2 *= int(a)
+            count += 1
+    else:
+        num2 = int(args[2])
 
+    num1 = int(args[1])
+    num = args[0].replace(':', '=')
+
+    result = 1 if num2 > num1 else 0
+    if result == 1:
+        num1, num2 = num2, num1
+
+    print(f"{num}{num1}*{num2}")
+
+
+if len(sys.argv) != 2:
+    print('Usage: ./script.py <file>')
+    sys.exit(1)
+else:
+    with open(sys.argv[1], 'r') as file:
+        for line in file:
+            result = subprocess.check_output(['factor', line.strip()]
+                                             ).decode('utf-8').split()
+            check_factor(result)
