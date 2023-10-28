@@ -4,11 +4,15 @@ import sys
 
 
 def check_prime(args):
-    	p = int(args[2])
-    	q = int(args[1])
-    	n = args[0].replace(':', '=')
+	num = args[0].replace(':', '')
+	if len(args)!=3 :
+		print(f'{num} is not a RSA number')
+	else :
+		p = int(args[2])
+		q = int(args[1])
+		n = args[0].replace(':', '=')
 
-    	print(f"{n}{p}*{q}")
+		print(f"{n}{p}*{q}")
 
 
 if len(sys.argv) != 2:
