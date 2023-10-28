@@ -26,7 +26,7 @@ def check_factor(args):
 
 
 if len(sys.argv) != 2:
-    print('Usage: ./script.py <file>')
+    print('Usage: factors  <file>')
     sys.exit(1)
 else:
     with open(sys.argv[1], 'r') as file:
