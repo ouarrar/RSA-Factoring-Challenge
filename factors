@@ -9,11 +9,8 @@ def factor_numbers(input_file):
                 result = subprocess.check_output(["factor", n]
                                                  ).decode('utf-8').strip()
                 factors = result.split(': ')[1].split()
-                if len(factors) == 2:
-                    p, q = factors
-                else :
-                    p = factors[0]
-                    q = int(n) // int(p)
+                p = factors[0]
+                q = int(n) // int(p)
                 print(f"{n}={q}*{p}")
     except FileNotFoundError:
         print(f"Error: File '{input_file}' not found.")
