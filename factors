@@ -6,7 +6,8 @@ def factor_numbers(input_file):
         with open(input_file, 'r') as file:
             for line in file:
                 n = line.strip()
-                result = subprocess.check_output(["factor", n]).decode('utf-8').strip()
+                result = subprocess.check_output(["factor", n]
+                                                 ).decode('utf-8').strip()
                 factors = result.split(': ')[1].split()
                 if len(factors) == 2:
                     p, q = factors
