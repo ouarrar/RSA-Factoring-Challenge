@@ -1,22 +1,6 @@
 #!/usr/bin/env python3
 import subprocess
 
-def factor_numbers(input_file):
-    try:
-        with open(input_file, 'r') as file:
-            for line in file:
-                n = line.strip()
-                result = subprocess.check_output(["factor", n]
-                                                 ).decode('utf-8').strip()
-                factors = result.split(': ')[1].split()
-                p = factors[0]
-                q = int(n) // int(p)
-                print(f"{n}={q}*{p}")
-    except FileNotFoundError:
-        print(f"Error: File '{input_file}' not found.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
 if __name__ == "__main__":
     import sys
 
@@ -25,5 +9,19 @@ if __name__ == "__main__":
         sys.exit(1)
 
     input_file = sys.argv[1]
-    factor_numbers(input_file)
+    try:
+        with open(input_file, 'r') as file:
+                for line in file:
+                    n = line.strip()
+                    result = subprocess.check_output(["factor", n]
+                                                     ).decode('utf-8').strip()
+                    factors = result.split(': ')[1].split()
+                    p = factors[0]
+                    q = int(n) // int(p)
+                    print(f"{n}={q}*{p}")
+    except FileNotFoundError:
+            print(f"Error: File '{input_file}' not found.")
+    except Exception as e:
+            print(f"An error occurred: {e}")
+    """"factor_numbers(input_file)"""
 
