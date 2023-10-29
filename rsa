@@ -18,7 +18,7 @@ if __name__ == "__main__":
 				prcss = subprocess.check_output(["factor", n])
 				result = prcss.decode('utf-8').strip()
 				factorslist = result.split(': ')
-				if len(factorslist) != 2:
+				if len(factorslist) < 2:
 					print(f"{n} not a RSA number")
 				else :
 					factors=factorslist[1].split()
@@ -26,7 +26,7 @@ if __name__ == "__main__":
 					if p == n:
 						print(f"{n} not a RSA number")
 					else:
-						q = factors[1]
+						q = int(n)// int(p)
 						print(f"{n}={q}*{p}")
 	except FileNotFoundError:
 		print(f"Error: File '{input_file}' not found.")
