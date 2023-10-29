@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 import subprocess
+from collections import Counter
+def find_factors(n, factors):
+    factor_count = Counter(factors)
+    exponents = [(factor, count) for factor, count in factor_count.items()]
+    p=int(exponents[0][0])**int(exponents[0][1])
+    q=int(n)//p
+    print(f"{n}={q}*{p}")
 
 if __name__ == "__main__":
 	import sys
@@ -26,8 +33,7 @@ if __name__ == "__main__":
 					if p == n:
 						print(f"{n} not a RSA number")
 					else:
-						q = int(n)// int(p)
-						print(f"{n}={q}*{p}")
+						find_factors(n, factors)
 	except FileNotFoundError:
 		print(f"Error: File '{input_file}' not found.")
 	except Exception as e:
