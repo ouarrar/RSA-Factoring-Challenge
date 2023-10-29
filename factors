@@ -13,6 +13,8 @@ if __name__ == "__main__":
         with open(input_file, 'r') as file:
                 for line in file:
                     n = line.strip()
+                    if not n:
+                       continue
                     result = subprocess.check_output(["factor", n]
                                                      ).decode('utf-8').strip()
                     factors = result.split(': ')[1].split()
