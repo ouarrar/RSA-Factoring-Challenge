@@ -1,48 +1,27 @@
-#!/usr/bin/env bash
-#is a challenge
-check_factor()
-{
-	if [ $# -ne 3 ];
-        then
-                args=("$@")
-                count=0
-                num2=1
-                for a in ${args[*]};
-                do
-                        if [ $count -gt 1 ];
-                        then
-                                num2=$(echo $a*$num2 | bc)
-                        fi
-                        count=$((count + 1))
-                done
-        else
-                num2=$3
-        fi
+#!/usr/bin/env python3
+import subprocess
 
-        num1=$2
-        num=$(echo "$1" | tr ':' '=')
+if __name__ == "__main__":
+    import sys
 
-        result=$(echo "if($num2 > $num1) 1 else 0" | bc)
-	        if ((result == 1)); then
-		        numcp=$num1
-		        num1=$num2
-		        num2=$numcp
-                fi
+    if len(sys.argv) != 2:
+        print(f"Usage: {sys.argv[0]} <file>")
+        sys.exit(1)
 
-        echo "$num$num1*$num2"
-}
+    input_file = sys.argv[1]
+    try:
+        with open(input_file, 'r') as file:
+                for line in file:
+                    n = line.strip()
+                    result = subprocess.check_output(["factor", n]
+                                                     ).decode('utf-8').strip()
+                    factors = result.split(': ')[1].split()
+                    p = factors[0]
+                    q = int(n) // int(p)
+                    print(f"{n}={q}*{p}")
+    except FileNotFoundError:
+            print(f"Error: File '{input_file}' not found.")
+    except Exception as e:
+            print(f"An error occurred: {e}")
+    """"factor_numbers(input_file)"""
 
-if [ $# -ne 1 ]
-then
-        echo 'Usage: rsa <file>'
-        exit 1
-else
-
-        while read i
-        do
-
-                result=$(factor "$i")
-                check_factor $result
-
-        done < "$1"
-fi
