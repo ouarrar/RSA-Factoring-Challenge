@@ -2,26 +2,27 @@
 import subprocess
 
 if __name__ == "__main__":
-    import sys
+	import sys
 
-    if len(sys.argv) != 2:
-        print(f"Usage: {sys.argv[0]} <file>")
-        sys.exit(1)
+	if len(sys.argv) != 2:
+		print(f"Usage: {sys.argv[0]} <file>")
+		sys.exit(1)
 
-    input_file = sys.argv[1]
-    try:
-        with open(input_file, 'r') as file:
-                for line in file:
-                    n = line.strip()
-                    result = subprocess.check_output(["factor", n]
-                                                     ).decode('utf-8').strip()
-                    factors = result.split(': ')[1].split()
-                    p = factors[0]
-                    q = int(n) // int(p)
-                    print(f"{n}={q}*{p}")
-    except FileNotFoundError:
-            print(f"Error: File '{input_file}' not found.")
-    except Exception as e:
-            print(f"An error occurred: {e}")
-    """"factor_numbers(input_file)"""
-
+	input_file = sys.argv[1]
+	try:
+		with open(input_file, 'r') as file:
+			for line in file:
+				n = line.strip()
+				prcss = subprocess.check_output(["factor", n])
+				result = prcss.decode('utf-8').strip()
+				factors = result.split(': ')[1].split()
+				if len(factors) != 2:
+					print(f"{n} not a RSA number")
+				else :
+					p = factors[0]
+					q = factors[1]
+					print(f"{n}={q}*{p}")
+	except FileNotFoundError:
+		print(f"Error: File '{input_file}' not found.")
+	except Exception as e:
+		print(f"An error occurred: {e}")
